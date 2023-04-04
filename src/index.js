@@ -71,7 +71,9 @@ const resolvers = {
       }
     },
   },
-  Query: {},
+  Query: {
+    
+  },
   Mutation: {
     async updateAccountpayBookEntry(parent, args, context, info) {
       let updateResponse = await updateUserAccountBook(context, args.input);
