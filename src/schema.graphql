@@ -63,3 +63,7 @@ extend type Account {
   AccountBook: [AccountBook]
   AvailableFulfillmentMethods: [AvailableFulfillmentMethod]
 }
+
+type Query {
+  getAllSeller: [Account]
+}
