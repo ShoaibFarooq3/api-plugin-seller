@@ -79,9 +79,34 @@ const resolvers = {
         throw new Error("Unauthorized access. Please login first");
       }
       const { Accounts } = context.collections;
-      const allUsersResponse = await Accounts.find({ roles: "vendor" }).toArray();
-      console.log(allUsersResponse)
-      // return allUsersResponse;
+      const allUsersResponse = await Accounts.find({ roles: "vendor" }).limit(10).toArray();
+      console.log("Before : ", allUsersResponse)
+      // for (const user of allUsersResponse) {
+      //   if (!user) {
+      //     return null;
+      //   }
+      //   if (!user.name) {
+      //     user.name = user.username;
+      //   }
+      //   if (!user.company) {
+      //     user.company = '';
+      //   }
+      //   if (!user.emails) {
+      //     user.emails = '';
+      //   }
+      //   if (!user.phone) {
+      //     user.phone = '';
+      //   }
+      //   if (!user.bio) {
+      //     user.bio = '';
+      //   }
+      //   if (!user.username) {
+      //     user.username = '';
+      //   }
+      // }
+
+      // console.log("After : ", allUsersResponse)
+      return allUsersResponse;
     }
   },
   Mutation: {
@@ -94,15 +119,7 @@ const resolvers = {
       let reaction_response = updateResponse.length > 0 ? updateResponse.map(id => { return encodeOpaqueIdFunction("reaction/fulfillmentMethod", id) }) : []
       return reaction_response;
     },
-    async getAllSeller(parent, args, context, info) {
-      console.log(args)
-      console.log(context);
-      if (context.user === undefined || context.user === null) {
-        throw new Error("Unauthorized access. Please login first");
-      }
-      const allUsersResponse = await Accounts.find({ roles: "vendor" }).toArray();
-      return allUsersResponse;
-    }
+   
   },
 };
 function encodeOpaqueIdFunction(source, id) {
