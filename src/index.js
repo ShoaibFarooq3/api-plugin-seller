@@ -75,9 +75,9 @@ const resolvers = {
     async getAllSeller(parent, args, context, info) {
       console.log(args)
       console.log(context.collections);
-      if (context.user === undefined || context.user === null) {
-        throw new Error("Unauthorized access. Please login first");
-      }
+      // if (context.user === undefined || context.user === null) {
+      //   throw new Error("Unauthorized access. Please login first");
+      // }
       const { Accounts } = context.collections;
       const allUsersResponse = await Accounts.find({ roles: "vendor" }).toArray();
       console.log(allUsersResponse)
